@@ -1,6 +1,7 @@
 package com.recipeapp.ui;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -55,5 +56,22 @@ public class RecipeUI {
     }
 
     private void displayRecipes() {
+        try {
+            ArrayList<Recipe> recipes = dataHandler.readData();
+            if (recipes.isEmpty()) {
+                System.out.println("No recipes available.");
+            } else {
+                
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+/*  private void displayRecipes() {
+        File dataFile = new File(dataHandler.b());
+    }
+
+    public ArrayList<Recipe> readData() {}*/
 }
