@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import com.recipeapp.datahandler.DataHandler;
+import com.recipeapp.model.Recipe;
 
 public class RecipeUI {
     private BufferedReader reader;
@@ -33,6 +35,7 @@ public class RecipeUI {
 
                 switch (choice) {
                     case "1":
+                    this.displayRecipes();
                         break;
                     case "2":
                         break;
@@ -49,5 +52,8 @@ public class RecipeUI {
                 System.out.println("Error reading input from user: " + e.getMessage());
             }
         }
+    }
+
+    private void displayRecipes() {
     }
 }
