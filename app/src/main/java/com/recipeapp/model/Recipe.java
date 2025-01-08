@@ -18,4 +18,6 @@ public class Recipe {
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
+    
+    
 }

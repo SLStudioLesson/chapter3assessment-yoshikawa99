@@ -1,7 +1,9 @@
 package com.recipeapp.datahandler;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -38,15 +40,12 @@ public class CSVDataHandler implements DataHandler {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                ArrayList<Ingredient> ingredients = new ArrayList<>();
                 String[] pairs = line.split(",");
-                // for loop
-                    // Ingredient ingredient = new Ingredient();\
-                    // ingredients.add(ingredient);
-
-                // for (String pair : pairs) {
-                //     System.out.println(pair);
-                // }
+                ArrayList<Ingredient> ingredients = new ArrayList<>();
+                for (int i = 1; i < pairs.length; i++) {
+                    Ingredient ingredient = new Ingredient(pairs[i]);
+                    ingredients.add(ingredient);
+                }
                 Recipe recipe = new Recipe(pairs[0], ingredients);
                 recipes.add(recipe);
             }
@@ -56,8 +55,22 @@ public class CSVDataHandler implements DataHandler {
         return recipes;
     }
 
+
     @Override
-    public void writeData(Recipe recipe) {}
+    public void writeData(Recipe recipe)  throws IOException{
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(recipe.getName());
+            recipe.getIngredients();
+            for (Ingredient a : recipe.getIngredients()) {
+                
+                writer.write("," + a.getName());
+            }
+            writer.write("\n");
+            System.out.println("Recipe added successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public ArrayList<Recipe> searchData(String keyword) {
